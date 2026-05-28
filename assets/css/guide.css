@@ -1,0 +1,76 @@
+/* Shared styles for the tabbed "AREAS" guides (Java + DevOps interview prep). */
+:root {
+  --bg: #0a0e17; --surface: #111827; --surface2: #1a2234;
+  --border: #1e2d45; --text: #d1d5db; --text-bright: #f3f4f6;
+  --muted: #6b7280;
+  --accent1: #38bdf8; --accent2: #f59e0b; --accent3: #34d399;
+  --accent4: #a78bfa; --accent5: #fb7185; --accent6: #2dd4bf;
+  --accent7: #e879f9; --accent8: #f97316;
+  --code-bg: #070b14;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+.topbar { position: sticky; top: 0; z-index: 100; background: rgba(10,14,23,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+.topbar-title { font-weight: 700; color: var(--text-bright); font-size: 13px; margin-right: 10px; white-space: nowrap; }
+.home-link { font-size: 11px; color: var(--muted); text-decoration: none; border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; margin-right: 4px; transition: all .15s; }
+.home-link:hover { color: var(--accent1); border-color: var(--accent1); }
+.nav-btn { padding: 4px 11px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 11px; font-weight: 500; cursor: pointer; transition: all .15s; font-family: inherit; white-space: nowrap; }
+.nav-btn:hover { border-color: var(--accent1); color: var(--accent1); }
+.nav-btn.active { background: var(--accent1); color: #000; border-color: var(--accent1); font-weight: 600; }
+
+.main { max-width: 920px; margin: 0 auto; padding: 24px 20px 80px; }
+.area-header { margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+.area-number { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+.area-title { font-size: 24px; font-weight: 700; color: var(--text-bright); margin-bottom: 6px; }
+.area-what { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+.area-what em { color: var(--accent2); font-style: normal; }
+
+.topic { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+.topic-head { padding: 13px 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background .15s; }
+.topic-head:hover { background: var(--surface2); }
+.topic-name { font-size: 14px; font-weight: 600; color: var(--text-bright); }
+.topic-tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; letter-spacing: .5px; text-transform: uppercase; }
+.tag-must, .tag-adv { background: rgba(251,113,133,0.15); color: var(--accent5); }
+.tag-likely, .tag-inter { background: rgba(245,158,11,0.15); color: var(--accent2); }
+.tag-possible { background: rgba(56,189,248,0.15); color: var(--accent1); }
+.tag-basic { background: rgba(52,211,153,0.15); color: var(--accent3); }
+.chevron { color: var(--muted); transition: transform .2s; font-size: 13px; }
+.topic.open .chevron { transform: rotate(90deg); }
+.topic-body { display: none; padding: 0 16px 16px; }
+.topic.open .topic-body { display: block; }
+
+.explanation { font-size: 13px; color: var(--text); margin-bottom: 12px; line-height: 1.65; }
+.explanation strong { color: var(--text-bright); }
+.explanation code, .q-answer code { background: var(--surface2); padding: 1px 5px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--accent6); }
+
+.code-wrap { position: relative; background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; margin: 10px 0 12px; overflow: hidden; }
+.code-label { display: flex; justify-content: space-between; align-items: center; padding: 4px 12px; background: rgba(30,45,69,0.5); border-bottom: 1px solid var(--border); }
+.code-lang { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.code-lang.py { color: var(--accent3); }
+.code-lang.java { color: var(--accent1); }
+.code-lang.bash { color: var(--accent2); }
+.code-lang.concept { color: var(--accent4); }
+.code-lang.yaml { color: var(--accent6); }
+.code-lang.hcl { color: var(--accent8); }
+.code-lang.sql { color: var(--accent8); }
+.code-lang.xml { color: var(--accent7); }
+.copy-btn { background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--muted); font-size: 10px; padding: 1px 7px; cursor: pointer; font-family: inherit; }
+.copy-btn:hover { color: var(--text-bright); border-color: var(--muted); }
+pre { margin: 0; padding: 12px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.55; color: #e2e8f0; }
+
+.phrase { background: var(--surface2); border-left: 3px solid var(--accent3); padding: 9px 13px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 12.5px; }
+.phrase-label { font-size: 10px; font-weight: 700; color: var(--accent3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+.gotcha { background: rgba(251,113,133,0.06); border-left: 3px solid var(--accent5); padding: 9px 13px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 12.5px; }
+.gotcha-label { font-size: 10px; font-weight: 700; color: var(--accent5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+.q-block { background: rgba(56,189,248,0.05); border: 1px solid rgba(56,189,248,0.15); border-radius: 8px; padding: 11px 13px; margin: 10px 0; }
+.q-label { font-size: 10px; font-weight: 700; color: var(--accent1); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.q-text { font-size: 13px; color: var(--text-bright); font-weight: 500; margin-bottom: 5px; }
+.q-answer { font-size: 12.5px; color: var(--text); line-height: 1.6; }
+.q-answer strong { color: var(--text-bright); }
+
+.progress-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,14,23,0.95); backdrop-filter: blur(8px); border-top: 1px solid var(--border); padding: 8px 20px; display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); z-index: 100; }
+.progress-track { flex: 1; height: 4px; background: var(--surface2); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent3); border-radius: 2px; transition: width .3s; }
+.area { display: none; }
+.area.visible { display: block; }
