@@ -1,8 +1,9 @@
 # Engineering Interview & Reference Guides
 
 A small, dependency-free **static web app** of interactive cheat sheets and interview-prep
-guides for Java engineers and DevOps practitioners. No build step, no framework — just HTML,
-CSS, and vanilla JavaScript served as static files.
+guides for Java engineers, DevOps practitioners, and cloud/IaC (Azure DevOps, AWS + Terraform)
+interviews. No build step, no framework — just HTML, CSS, and vanilla JavaScript served as
+static files.
 
 🔗 **Live site:** https://ahafarag.github.io/devops_cheat_sheet/
 
@@ -11,7 +12,9 @@ CSS, and vanilla JavaScript served as static files.
 | Guide | Page | Contents |
 |-------|------|----------|
 | ☕ **Java Developer — Complete Guide** | `java_developer_guide.html` | 10 tabs / 67 topics: core language, OOP & design, collections, modern Java (8→21), concurrency, JVM & memory, Spring Boot, persistence, testing, and interview Q&A. Topics tagged **Basic / Intermediate / Advanced**. |
-| 🎯 **DevOps Interview Prep** | `devops_full_interview_prep.html` | 8 tabs: tech-stack depth, coding, CS fundamentals, tooling, problem solving, containers, Kubernetes, and security — each with likely questions and ready-to-say answers. |
+| 🎯 **DevOps Interview Prep** | `devops_full_interview_prep.html` | 8 tabs / 53 topics: tech-stack depth, coding, CS fundamentals, tooling, problem solving, containers, Kubernetes, and security — each with likely questions and ready-to-say answers. |
+| 🔷 **Azure DevOps — Complete Guide** | `azure_devops_guide.html` | 7 tabs / 31 topics: Boards, Repos & branch policies, YAML Pipelines, environments & approvals, Artifacts & variables, agents & secretless service connections, plus a dedicated Azure DevOps interview Q&A tab. |
+| ☁️ **AWS + Terraform — Complete Guide** | `aws_terraform_guide.html` | 7 tabs / 29 topics: AWS global infra & IAM, compute & containers, VPC networking, storage & databases, plus Terraform core and advanced (state, modules, remote backends), and an AWS & Terraform interview Q&A tab. |
 | 🚀 **Python & Bash Cheat Sheet** | `devops_code_cheatsheet.html` | The 7 coding patterns that cover ~90% of DevOps screen-share questions, with side-by-side Python and Bash. |
 
 ## Project structure
@@ -21,6 +24,8 @@ CSS, and vanilla JavaScript served as static files.
 ├── index.html                       # Landing page (cards linking to each guide)
 ├── java_developer_guide.html        # Thin shell: loads CSS + data + renderer
 ├── devops_full_interview_prep.html  # Thin shell
+├── azure_devops_guide.html          # Thin shell
+├── aws_terraform_guide.html         # Thin shell
 ├── devops_code_cheatsheet.html      # Thin shell
 ├── assets/
 │   ├── css/
@@ -33,6 +38,8 @@ CSS, and vanilla JavaScript served as static files.
 │       └── data/                    # Content, split into one file per tab/section
 │           ├── java/                #   01-core.js … 10-interview-qa.js
 │           ├── devops-interview/    #   01-tech-stack.js … 08-security-quality.js
+│           ├── azure-devops/        #   01-overview-boards.js … 07-interview-qa.js
+│           ├── aws-terraform/       #   01-core-iam.js … 07-interview-qa.js
 │           └── devops-cheatsheet/   #   01-file-io.js … 07-dict-list-tricks.js
 ├── README.md
 └── LICENSE                          # MIT
