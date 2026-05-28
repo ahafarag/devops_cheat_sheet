@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Interview — Python & Bash Cheat Sheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 20px;
+    line-height: 1.5;
+  }
+  h1 { color: #f0f6fc; font-size: 22px; margin-bottom: 4px; }
+  .subtitle { color: #8b949e; font-size: 13px; margin-bottom: 24px; }
+  .section { margin-bottom: 36px; border: 1px solid #21262d; border-radius: 8px; overflow: hidden; }
+  .section-header {
+    background: #161b22;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .section-header:hover { background: #1c2128; }
+  .section-title { font-size: 15px; font-weight: 600; color: #f0f6fc; }
+  .section-hint { font-size: 12px; color: #f0883e; font-style: italic; margin-top: 2px; }
+  .section-body { display: none; padding: 16px; }
+  .section.open .section-body { display: block; }
+  .section.open .arrow { transform: rotate(90deg); }
+  .arrow { color: #8b949e; transition: transform 0.2s; font-size: 14px; }
+  .memorize {
+    background: #1c1007;
+    border: 1px solid rgba(240,136,62,0.25);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+  .memorize strong { color: #f0883e; }
+  .memorize code { color: #ffa657; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; }
+  .lang-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+  .lang-tab {
+    padding: 4px 14px;
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #21262d;
+    color: #8b949e;
+  }
+  .lang-tab.active-py { background: #238636; color: #fff; }
+  .lang-tab.active-bash { background: #f0883e; color: #fff; }
+  pre {
+    background: #010409;
+    border: 1px solid #21262d;
+    border-radius: 6px;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 12.5px;
+    line-height: 1.55;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    color: #c9d1d9;
+  }
+  .code-block { position: relative; }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: #30363d; color: #f0f6fc; }
+  .tips { margin-top: 28px; border-top: 1px solid #21262d; padding-top: 20px; }
+  .tips h2 { font-size: 16px; color: #f0f6fc; margin-bottom: 12px; }
+  .tip {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 12px;
+    background: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .tip-icon { font-size: 16px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<h1>🚀 DevOps Interview — Python & Bash Survival Kit</h1>
+<p class="subtitle">7 patterns that cover 90% of DevOps coding questions. Click each to expand. Memorize the orange line.</p>
+
+<div id="sections"></div>
+
+<div class="tips">
+  <h2>🛡️ Screen-Share Survival Tips</h2>
+  <div class="tip"><span class="tip-icon">🗣️</span><span>Talk while you code. Say "I'll start by reading the file line by line..." — silence kills you.</span></div>
+  <div class="tip"><span class="tip-icon">🧪</span><span>Start with the simplest approach. A working ugly solution beats an incomplete elegant one.</span></div>
+  <div class="tip"><span class="tip-icon">❓</span><span>Ask clarifying questions first: "How large is this file?" "What format is the log?"</span></div>
+  <div class="tip"><span class="tip-icon">🐍</span><span>Use Python's power: Counter, defaultdict, pathlib, f-strings — it shows you know the language.</span></div>
+  <div class="tip"><span class="tip-icon">🔄</span><span>Pattern: Read input → Process (loop/filter/count) → Output result. Every DevOps script follows this.</span></div>
+  <div class="tip"><span class="tip-icon">📝</span><span>If you forget syntax, say "I usually look this up but the approach is..." — they understand.</span></div>
+</div>
+
+<script>
+const DATA = [
+  {
+    title: "1. File I/O — Read, Write, Parse Logs",
+    emoji: "📄",
+    hint: "They'll say: 'Parse this log file and count errors'",
+    memorize: "with open('file','r') as f: → for line in f: → if 'X' in line → Counter()",
+    python: `# Read a file line by line
+with open("app.log", "r") as f:
+    for line in f:
+        if "ERROR" in line:
+            print(line.strip())
+
+# Count error types
+from collections import Counter
+
+errors = []
+with open("app.log", "r") as f:
+    for line in f:
+        if "ERROR" in line:
+            errors.append(line.split("ERROR")[1].strip())
+
+top_errors = Counter(errors).most_common(5)
+for msg, count in top_errors:
+    print(f"{count}: {msg}")
+
+# Write output
+with open("report.txt", "w") as f:
+    f.write("Error Report\\n")
+    for msg, count in top_errors:
+        f.write(f"{count}: {msg}\\n")`,
+    bash: `# Count errors in log
+grep -c "ERROR" app.log
+
+# Top 5 error messages
+grep "ERROR" app.log | awk -F'ERROR' '{print $2}' | sort | uniq -c | sort -rn | head -5
+
+# Tail logs in real-time filtering errors
+tail -f app.log | grep --line-buffered "ERROR"
+
+# Find large log files (>100MB)
+find /var/log -type f -size +100M -exec ls -lh {} \\;`
+  },
+  {
+    title: "2. JSON & YAML — Config Manipulation",
+    emoji: "⚙️",
+    hint: "They'll say: 'Read this config, change the region, save it'",
+    memorize: "json.load(f) → modify dict → json.dump(data, f, indent=2)",
+    python: `import json
+
+# Read JSON
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+# Modify
+config["region"] = "eu-west-1"
+config["settings"]["timeout"] = 30
+
+# Write back (pretty-printed)
+with open("config.json", "w") as f:
+    json.dump(config, f, indent=2)
+
+# ------- YAML -------
+import yaml
+
+with open("values.yaml", "r") as f:
+    data = yaml.safe_load(f)
+
+data["replicas"] = 3
+
+with open("values.yaml", "w") as f:
+    yaml.dump(data, f, default_flow_style=False)`,
+    bash: `# Read a JSON value with jq
+cat config.json | jq '.region'
+
+# Modify JSON in place
+jq '.region = "eu-west-1"' config.json > tmp.json && mv tmp.json config.json
+
+# Extract nested value
+jq '.settings.timeout' config.json
+
+# Loop over JSON array
+jq -r '.servers[]' config.json | while read server; do
+    echo "Pinging $server..."
+    ping -c 1 "$server"
+done`
+  },
+  {
+    title: "3. API / Health Checks",
+    emoji: "🌐",
+    hint: "They'll say: 'Write a health check script for our services'",
+    memorize: "requests.get(url, timeout=5) → r.status_code → try/except RequestException",
+    python: `import requests
+
+# Simple health check
+response = requests.get("https://api.example.com/health", timeout=5)
+if response.status_code == 200:
+    print("Service is UP")
+else:
+    print(f"Service DOWN: {response.status_code}")
+
+# Check multiple services
+services = {
+    "api": "https://api.example.com/health",
+    "auth": "https://auth.example.com/ping",
+    "db": "https://db.example.com/status",
+}
+
+for name, url in services.items():
+    try:
+        r = requests.get(url, timeout=5)
+        status = "UP" if r.status_code == 200 else f"DOWN ({r.status_code})"
+    except requests.exceptions.RequestException as e:
+        status = f"UNREACHABLE ({e})"
+    print(f"{name}: {status}")
+
+# POST with JSON body + headers
+resp = requests.post(
+    "https://api.example.com/deploy",
+    json={"version": "1.2.3", "env": "prod"},
+    headers={"Authorization": "Bearer TOKEN"}
+)
+print(resp.json())`,
+    bash: `# Health check with curl
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://api.example.com/health)
+if [ "$STATUS" -eq 200 ]; then
+    echo "Service is UP"
+else
+    echo "Service is DOWN: $STATUS"
+fi
+
+# Check multiple endpoints
+for url in https://api.example.com https://auth.example.com; do
+    STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$url/health")
+    echo "$url: $STATUS"
+done
+
+# POST JSON with curl
+curl -X POST https://api.example.com/deploy \\
+  -H "Content-Type: application/json" \\
+  -d '{"version": "1.2.3"}'`
+  },
+  {
+    title: "4. Run Shell Commands from Python",
+    emoji: "🖥️",
+    hint: "They'll say: 'Automate this with Python calling system commands'",
+    memorize: "subprocess.run(['cmd','arg'], capture_output=True, text=True) → result.stdout",
+    python: `import subprocess
+
+# Run a command, capture output
+result = subprocess.run(
+    ["df", "-h"],
+    capture_output=True,
+    text=True
+)
+print(result.stdout)
+
+# Check return code
+result = subprocess.run(
+    ["systemctl", "is-active", "nginx"],
+    capture_output=True, text=True
+)
+if result.returncode == 0:
+    print("nginx is running")
+else:
+    print("nginx is NOT running")
+
+# Run with shell=True (for pipes)
+result = subprocess.run(
+    "ps aux | grep python | wc -l",
+    shell=True, capture_output=True, text=True
+)
+print(f"Python processes: {result.stdout.strip()}")
+
+# Run and raise error if it fails
+subprocess.run(["docker", "build", "-t", "myapp", "."], check=True)`,
+    bash: `# Check if service is running
+if systemctl is-active --quiet nginx; then
+    echo "nginx is running"
+else
+    echo "nginx is DOWN"
+    systemctl restart nginx
+fi
+
+# Disk usage alert
+USAGE=$(df / | tail -1 | awk '{print $5}' | tr -d '%')
+if [ "$USAGE" -gt 80 ]; then
+    echo "WARNING: Disk usage is \${USAGE}%"
+fi
+
+# Check if port is open
+if nc -z localhost 8080 2>/dev/null; then
+    echo "Port 8080 is open"
+else
+    echo "Port 8080 is closed"
+fi`
+  },
+  {
+    title: "5. Regex & String Parsing",
+    emoji: "🔍",
+    hint: "They'll say: 'Extract all IPs from this log'",
+    memorize: "re.findall(r'pattern', text) → list  |  re.search(r'pattern', text).group(1)",
+    python: `import re
+
+log = '2026-05-28 10:23:45 ERROR [10.0.1.55] Connection refused from 192.168.1.100'
+
+# Extract all IPs
+ips = re.findall(r'\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}', log)
+print(ips)  # ['10.0.1.55', '192.168.1.100']
+
+# Extract timestamp
+ts = re.search(r'(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})', log)
+print(ts.group(1))  # '2026-05-28 10:23:45'
+
+# String methods (no regex needed)
+line = "server=web01 status=200 time=0.45s"
+parts = dict(item.split("=") for item in line.split())
+print(parts["server"])   # web01`,
+    bash: `# Extract IPs from log
+grep -oE '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' app.log
+
+# Unique IPs sorted by frequency
+grep -oE '[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' app.log | sort | uniq -c | sort -rn
+
+# Extract field from structured log
+awk '{print $4}' access.log
+
+# sed: replace in file
+sed -i 's/old_value/new_value/g' config.txt`
+  },
+  {
+    title: "6. Files & Directories",
+    emoji: "📁",
+    hint: "They'll say: 'Find old files, clean up, rotate logs'",
+    memorize: "Path('/dir').glob('*.log') → f.stat().st_size → f.unlink()",
+    python: `import os
+from pathlib import Path
+import time
+
+# List files with pathlib
+log_dir = Path("/var/log")
+for f in log_dir.glob("*.log"):
+    print(f.name, f.stat().st_size)
+
+# Find files older than 7 days
+now = time.time()
+for f in Path("/tmp").glob("*"):
+    if f.is_file():
+        age_days = (now - f.stat().st_mtime) / 86400
+        if age_days > 7:
+            print(f"Old file: {f.name} ({age_days:.0f} days)")
+            f.unlink()   # delete it
+
+# Create directory safely
+Path("/app/logs").mkdir(parents=True, exist_ok=True)`,
+    bash: `# Find and delete files older than 7 days
+find /tmp -type f -mtime +7 -delete
+
+# Find large files
+find / -type f -size +500M 2>/dev/null
+
+# Disk usage of directories
+du -sh /var/log/*
+
+# Safe mkdir
+mkdir -p /app/logs/archive
+
+# Copy with timestamp backup
+cp config.yaml "config.yaml.bak.$(date +%Y%m%d)"`
+  },
+  {
+    title: "7. Dict & List Tricks",
+    emoji: "⚡",
+    hint: "These come up inside almost every coding task",
+    memorize: "[x for x in list if cond]  |  sorted(list, key=lambda)  |  defaultdict(list)",
+    python: `# List comprehension (filter)
+logs = ["INFO ok", "ERROR fail", "INFO ok", "ERROR crash"]
+errors = [l for l in logs if "ERROR" in l]
+
+# Dict comprehension
+servers = ["web01", "web02", "db01"]
+status = {s: "unknown" for s in servers}
+
+# Sort list of dicts
+deploys = [
+    {"app": "api", "time": 1200},
+    {"app": "web", "time": 800},
+]
+by_time = sorted(deploys, key=lambda d: d["time"], reverse=True)
+
+# Group with defaultdict
+from collections import defaultdict
+groups = defaultdict(list)
+for entry in logs:
+    level = entry.split()[0]
+    groups[level].append(entry)
+
+# Zip two lists into dict
+names = ["web01", "web02"]
+ips = ["10.0.0.1", "10.0.0.2"]
+mapping = dict(zip(names, ips))
+
+# Enumerate
+for i, server in enumerate(servers):
+    print(f"{i+1}. {server}")`,
+    bash: `# Arrays in bash
+servers=("web01" "web02" "db01")
+for s in "\${servers[@]}"; do
+    echo "Checking $s"
+done
+
+# Associative array (bash 4+)
+declare -A status
+status[web01]="running"
+status[db01]="stopped"
+echo "\${status[web01]}"`
+  }
+];
+
+const container = document.getElementById('sections');
+
+DATA.forEach((s, i) => {
+  const div = document.createElement('div');
+  div.className = 'section' + (i === 0 ? ' open' : '');
+  div.innerHTML = `
+    <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+      <div>
+        <div class="section-title">${s.emoji} ${s.title}</div>
+        <div class="section-hint">${s.hint}</div>
+      </div>
+      <span class="arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="memorize">
+        <strong>🧠 Memorize:</strong> <code>${s.memorize}</code>
+      </div>
+      <div class="lang-tabs">
+        <button class="lang-tab active-py" onclick="showLang(this, 'python', ${i})">🐍 Python</button>
+        <button class="lang-tab" onclick="showLang(this, 'bash', ${i})">💻 Bash</button>
+      </div>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(${i})">Copy</button>
+        <pre id="code-${i}">${escapeHtml(s.python)}</pre>
+      </div>
+    </div>
+  `;
+  container.appendChild(div);
+});
+
+function escapeHtml(text) {
+  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showLang(btn, lang, idx) {
+  const tabs = btn.parentElement.querySelectorAll('.lang-tab');
+  tabs.forEach(t => { t.className = 'lang-tab'; });
+  btn.className = 'lang-tab ' + (lang === 'python' ? 'active-py' : 'active-bash');
+  const pre = document.getElementById('code-' + idx);
+  pre.textContent = DATA[idx][lang];
+}
+
+function copyCode(idx) {
+  const pre = document.getElementById('code-' + idx);
+  navigator.clipboard.writeText(pre.textContent);
+  const btn = pre.parentElement.querySelector('.copy-btn');
+  btn.textContent = '✓ Copied';
+  setTimeout(() => btn.textContent = 'Copy', 1500);
+}
+</script>
+</body>
+</html>
