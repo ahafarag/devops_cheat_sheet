@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Commands — Card &amp; List Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/commands.css">
+</head>
+<body>
+<div class="cmd-topbar">
+  <a class="home-link" href="index.html">← Guides</a>
+  <span class="cmd-title" id="guide-title"></span>
+  <div class="view-toggle" id="view-toggle">
+    <button type="button" data-view="card" class="active">▦ Cards</button>
+    <button type="button" data-view="list">▤ List</button>
+  </div>
+</div>
+<div class="cmd-main">
+  <div class="cmd-controls">
+    <input id="cmd-search" class="cmd-search" type="text" placeholder="Search commands or descriptions…" autocomplete="off">
+    <div class="cmd-chips" id="cmd-chips"></div>
+  </div>
+  <div class="cmd-count" id="cmd-count"></div>
+  <div class="cmd-card-view" id="card-view"></div>
+  <div class="cmd-list-view" id="list-view"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>window.GUIDE_TITLE = '⌨️ DevOps Commands';</script>
+<script src="assets/js/data/devops-commands/01-linux.js"></script>
+<script src="assets/js/data/devops-commands/02-git.js"></script>
+<script src="assets/js/data/devops-commands/03-docker.js"></script>
+<script src="assets/js/data/devops-commands/04-kubernetes.js"></script>
+<script src="assets/js/data/devops-commands/05-helm.js"></script>
+<script src="assets/js/data/devops-commands/06-terraform.js"></script>
+<script src="assets/js/commands-renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+window.COMMANDS = window.COMMANDS || [];
+
+window.COMMANDS.push({ group: 'Terraform', category: 'Basic Terraform Commands', items: [
+  { command: 'terraform --help', description: 'Displays general help for Terraform CLI commands.' },
+  { command: 'terraform init', description: 'Initializes the working directory containing Terraform configuration files. It downloads the necessary provider plugins.' },
+  { command: 'terraform validate', description: 'Validates the Terraform configuration files for syntax errors or issues.' },
+  { command: 'terraform plan', description: 'Creates an execution plan, showing what actions Terraform will perform to make the infrastructure match the desired configuration.' },
+  { command: 'terraform apply', description: 'Applies the changes required to reach the desired state of the configuration. It will prompt for approval before making changes.' },
+  { command: 'terraform show', description: 'Displays the Terraform state or a plan in a human-readable format.' },
+  { command: 'terraform output', description: 'Displays the output values defined in the Terraform configuration after an apply.' },
+  { command: 'terraform destroy', description: 'Destroys the infrastructure defined in the Terraform configuration. It prompts for confirmation before destroying resources.' },
+  { command: 'terraform refresh', description: "Updates the state file with the real infrastructure's current state without applying changes." },
+  { command: 'terraform taint', description: "Marks a resource for recreation on the next apply. Useful for forcing a resource to be recreated even if it hasn't been changed." },
+  { command: 'terraform untaint', description: 'Removes the "tainted" status from a resource.' },
+  { command: 'terraform state', description: 'Manages Terraform state files, such as moving resources between modules or manually.' },
+  { command: 'terraform import', description: 'Imports existing infrastructure into Terraform management.' },
+  { command: 'terraform graph', description: "Generates a graphical representation of Terraform's resources and their relationships." },
+  { command: 'terraform providers', description: 'Lists the providers available for the current Terraform configuration.' },
+  { command: 'terraform state list', description: 'Lists all resources tracked in the Terraform state file.' },
+  { command: 'terraform backend', description: 'Configures the backend for storing Terraform state remotely (e.g., in S3, Azure Blob Storage, etc.).' },
+  { command: 'terraform state mv', description: 'Moves an item in the state from one location to another.' },
+  { command: 'terraform state rm', description: 'Removes an item from the Terraform state file.' },
+  { command: 'terraform workspace', description: 'Manages Terraform workspaces, which allow for creating separate environments within a single configuration.' },
+  { command: 'terraform workspace new', description: 'Creates a new workspace.' },
+  { command: 'terraform module', description: 'Manages and updates Terraform modules, which are reusable configurations.' },
+  { command: 'terraform init -get-plugins=true', description: 'Ensures that required plugins are fetched and available for modules.' },
+  { command: 'TF_LOG', description: 'Sets the logging level for Terraform debug output (e.g., TRACE, DEBUG, INFO, WARN, ERROR).' },
+  { command: 'TF_LOG_PATH', description: 'Directs Terraform logs to a specified file.' },
+  { command: 'terraform login', description: 'Logs into Terraform Cloud or Terraform Enterprise for managing remote backends and workspaces.' },
+  { command: 'terraform remote', description: 'Manages remote backends and remote state storage for Terraform configurations.' },
+  { command: 'terraform push', description: 'Pushes Terraform modules to a remote module registry.' }
+]});
